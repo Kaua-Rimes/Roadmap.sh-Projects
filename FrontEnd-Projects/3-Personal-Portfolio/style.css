@@ -27,7 +27,7 @@ nav {
 
 main{
   display: flex;
-
+  flex-direction: column;
 }
 
 h1 {
@@ -46,10 +46,65 @@ section {
     display: flex;
     flex:1;
     margin-top: 0.1rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
+    justify-content: space-evenly;
     border: 0.1rem solid;
     width: 33%;
-    height: 9rem;
+    height: 30rem;
+
 }
 
+.top-sections{
+  display: flex;
+}
+
+.projects{
+  display: flex;
+  margin-left: 1rem;
+  flex-direction: column;
+}
+
+.education {
+  display: flex;
+  margin-right: 1rem;
+}
+
+.reviews {
+  display: flex;
+  border: 0.1rem solid;
+  border-top: 0;
+  margin: 1rem;
+  margin-top: 0;
+}
+
+.opensource-work {
+  width: 100%;
+}
+
+.work-experience {
+  width: 100%;
+}
+
+.unite {
+  display: flex;
+  flex-direction: column;
+}
+
+.r1, .r2, .r3 {
+  display: flex;
+  border:0.1rem solid;
+  border-radius: 90px;
+  height: 10rem;
+  margin: 1rem;
+  align-items: center;
+  padding: 1rem;
+  margin-top: 0;
+}
+
+.reviews-title {
+  display: flex;
+  margin: 1rem;
+  margin-bottom: 0;
+  border: 0.1rem solid;
+  border-bottom: 0;
+  padding: 2rem;
+}
