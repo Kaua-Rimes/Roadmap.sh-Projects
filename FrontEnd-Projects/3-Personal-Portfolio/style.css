@@ -16,6 +16,8 @@ header {
   border: 0.1rem solid;
   border-bottom: 0;
   padding: 1rem;
+  margin: 1rem;
+  margin-bottom: 0rem;
 }
 
 nav {
@@ -23,12 +25,31 @@ nav {
   gap: 1rem;
 }
 
+main{
+  display: flex;
+
+}
+
 h1 {
-    text-align: center;
+    display: flex;
+    justify-content: center;
     border: 0.1rem solid;
     border-top: 0;
     padding-top: 4rem;
     padding-bottom: 7rem;
+    margin: 1rem;
+    margin-bottom: 0.1rem;
+    margin-top: 0rem;
 }
 
+section {
+    display: flex;
+    flex:1;
+    margin-top: 0.1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border: 0.1rem solid;
+    width: 33%;
+    height: 9rem;
+}
 
