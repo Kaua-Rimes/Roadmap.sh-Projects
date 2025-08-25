@@ -1,4 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@media (max-width: 768px) {
+  main {
+    flex-direction: column;
+  }
+}
 
 * {
   font-family: "Work Sans", sans-serif;
@@ -7,6 +12,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 header {
@@ -53,6 +63,18 @@ section {
 
 }
 
+footer{
+  display: flex;
+  justify-content: center;
+  padding:1rem ;
+  padding-top: 7rem;
+  padding-bottom: 13rem;
+  margin: 1rem;
+  margin-top: 0;
+  border: 0.1rem solid;
+  border-top: 0;
+}
+
 .top-sections{
   display: flex;
 }
@@ -60,7 +82,8 @@ section {
 .projects{
   display: flex;
   margin-left: 1rem;
-  flex-direction: column;
+  justify-content: center;
+
 }
 
 .education {
@@ -72,8 +95,10 @@ section {
   display: flex;
   border: 0.1rem solid;
   border-top: 0;
+  border-bottom: 0;
   margin: 1rem;
-  margin-top: 0;
+  margin-bottom: 0;
+  margin-top: 0;  
 }
 
 .opensource-work {
@@ -93,11 +118,11 @@ section {
   display: flex;
   border:0.1rem solid;
   border-radius: 90px;
-  height: 10rem;
-  margin: 1rem;
   align-items: center;
+  height: 5rem;
+  width: 40rem;
+  margin: 1rem;
   padding: 1rem;
-  margin-top: 0;
 }
 
 .reviews-title {
@@ -107,4 +132,31 @@ section {
   border: 0.1rem solid;
   border-bottom: 0;
   padding: 2rem;
+}
+
+ul {
+  display: flex;
+  list-style: none;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 5rem;
+}
+
+li{
+  display: flex;
+  justify-content: center;
+  border: 0.1rem solid;
+  margin: 0.1rem;
+  height: 2rem;
+  align-items: center;
+}
+
+.projects-title {
+  display: flex;
+  height: 1px;
+  margin-bottom: 1px;
+}
+
+h2 {
+  text-align: center;
 }
