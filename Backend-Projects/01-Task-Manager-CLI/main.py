@@ -1,7 +1,8 @@
 from modules import crud
+from modules import utils
 
 
-print("WELCOME TO TASK MANAGER CLI")
+print(utils.Colors.blue("WELCOME TO TASK MANAGER CLI!"))
 
 while True:
     action = input()

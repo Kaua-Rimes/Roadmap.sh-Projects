@@ -1,3 +1,5 @@
+from . import utils 
+
 def help():
     print("There will be help")
 
@@ -6,9 +8,13 @@ class Task:
         pass
     
     def add():
-        try:
-            task_name = input("Task name: ")
-        except :
-            print ("This place cannot be empty")
-        task_description = input("Task description: ")
+        while True:
+            task_name = input(utils.Colors.yellow("Task name: "))
+            if utils.ErrorChecks.empty_folder(task_name):
+                break
+        
+        while True:
+            task_description = input(utils.Colors.yellow("Task description: "))
+            if utils.ErrorChecks.empty_folder(task_description):
+                break
         
