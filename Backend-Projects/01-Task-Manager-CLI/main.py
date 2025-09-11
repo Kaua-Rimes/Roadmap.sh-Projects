@@ -9,6 +9,6 @@ while True:
     
     match action:
         case "add":
-            crud.Task.add()
+            crud.add()
         case _:
             crud.help()
