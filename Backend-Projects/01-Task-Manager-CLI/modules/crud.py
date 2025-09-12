@@ -1,11 +1,9 @@
 from . import utils 
-from json import *
-
-tasks_dict = {}
-id = 0
+import json
 
 def help():
     print("There will be help")
+
 
 class Task:
     def __init__(self, name, description):
@@ -16,10 +14,9 @@ class Task:
     def __repr__(self):
         return f'Task(name="{self.name}", description="{self.description}", status="{self.status}")'
 
-    
+
+
 def add():
-    global id
-    
     while True:
         task_name = input(utils.Colors.yellow("Task name: "))
         if utils.ErrorChecks.empty_folder(task_name):
@@ -30,10 +27,39 @@ def add():
         if utils.ErrorChecks.empty_folder(task_description):
             break
         
-    new_task = Task(task_name, task_description)
+    tasks_data = []
+    try:
+        with open("database.json", mode="r", encoding="utf-8") as read_file:
+            tasks_data = json.load(read_file)
+    except (FileNotFoundError, json.JSONDecodeError):
+        pass
     
-    id += 1
-    tasks_dict[id] = new_task
+    next_id = 1
+    if tasks_data:
+        next_id = tasks_data[-1]["id"] + 1
+        
+    new_task_dict = {
+        "id": next_id,
+        "name": task_name,
+        "description": task_description,
+        "status": "In progress"
+    }
+
+    tasks_data.append(new_task_dict)
     
+    with open("database.json", mode="w", encoding="utf-8") as write_file:
+        json.dump(tasks_data, write_file, indent=4)
+    
+    try:
+        with open("database.json", mode="w", encoding="utf-8") as write_file:
+            json.dump(tasks_data, write_file, indent=4)
+    except IOError as e:
+        print(utils.Colors.red(f"ERROR!{e} Task coud not be created."))
+        
     print(utils.Colors.green(f"{task_name} task successfully created."))
+        
+
+    
+    
+
     
