@@ -16,7 +16,7 @@ class Task:
 
 
 
-def add():
+def add_task():
     while True:
         task_name = input(utils.Colors.yellow("Task name: "))
         if utils.ErrorChecks.empty_folder(task_name):
@@ -57,9 +57,18 @@ def add():
         print(utils.Colors.red(f"ERROR!{e} Task coud not be created."))
         
     print(utils.Colors.green(f"{task_name} task successfully created."))
-        
 
+def view_tasks():
+    try:
+        with open("database.json", mode="r", encoding="utf-8") as read_file:
+            tasks_data = json.load(read_file)
+    except(FileNotFoundError, json.JSONDecodeError):
+        print(utils.Colors.red("No task found."))
+        return
     
+    if not tasks_data:
+        print(utils.Colors.red("No task found."))
+        return
     
-
+    print(json.dumps(tasks_data, indent=4))
     
