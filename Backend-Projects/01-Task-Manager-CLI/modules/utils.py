@@ -2,9 +2,9 @@ class ErrorChecks:
     def __init__(self):
         pass
     
-    def empty_folder (text):
+    def empty_field (text):
         if text.strip() == "":
-            print("This folder cannot be empty.")
+            print("This field cannot be empty.")
             return False
         else:
             return True 

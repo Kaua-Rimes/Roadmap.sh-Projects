@@ -18,12 +18,12 @@ class Task:
 def add_task():
     while True:
         task_name = input(utils.Colors.yellow("Task name: "))
-        if utils.ErrorChecks.empty_folder(task_name):
+        if utils.ErrorChecks.empty_field(task_name):
             break
     
     while True:
         task_description = input(utils.Colors.yellow("Task description: "))
-        if utils.ErrorChecks.empty_folder(task_description):
+        if utils.ErrorChecks.empty_field(task_description):
             break
         
     tasks_data = []
@@ -51,7 +51,7 @@ def add_task():
         with open("database.json", mode="w", encoding="utf-8") as write_file:
             json.dump(tasks_data, write_file, indent=4)
     except IOError as e:
-        print(utils.Colors.red(f"ERROR!{e} Task coud not be created."))
+        print(utils.Colors.red(f"ERROR!{e} Task could not be created."))
         
     print(utils.Colors.green(f"{task_name} task successfully created."))
 
@@ -73,7 +73,7 @@ def update_task():
     try:
         with open("database.json", mode="r", encoding="utf-8") as read_file:
             tasks_data = json.load(read_file)
-    except(FileNotFoundError, json.JSONDecodeError):
+    except (FileNotFoundError, json.JSONDecodeError):
         print(utils.Colors.red("No task found."))
         return
     
@@ -85,37 +85,44 @@ def update_task():
     
     while True:
         try:
-            option = int(input("Chose the ID of the task you would like to update. "))
-            if 1 <= option <= len(tasks_data):
-                break 
-            else:
-                print(utils.Colors.red("ERROR! Please, insert a valid ID number."))
+            option = int(input("Choose the ID of the task you would like to update. "))
+            break
         except ValueError:
             print(utils.Colors.red("ERROR! Please, insert a valid ID number."))
-            
-    while True:
-        task_name = input(utils.Colors.yellow("Task name: "))
-        if utils.ErrorChecks.empty_folder(task_name):
-            break
+    
+    task_found = False
+    
+    for index, task in enumerate(tasks_data):
+        if task['id'] == option:
+            while True:
+                task_name = input(utils.Colors.yellow("Task name: "))
+                if utils.ErrorChecks.empty_field(task_name):
+                    break
 
-    while True:
-        task_description = input(utils.Colors.yellow("Task description: "))
-        if utils.ErrorChecks.empty_folder(task_description):
+            while True:
+                task_description = input(utils.Colors.yellow("Task description: "))
+                if utils.ErrorChecks.empty_field(task_description):
+                    break
+            
+            tasks_data[index] = {
+                "id": option,
+                "name": task_name,
+                "description": task_description,
+                "status": "In progress"
+            }
+            task_found = True
             break
-                
-    tasks_data[option -1] = {
-    "id": option,
-    "name": task_name,
-    "description": task_description,
-    "status": "In progress"
-    }
+            
+    if not task_found:
+        print(utils.Colors.red(f"Could not find a task with the ID {option}"))
+        return
 
     try:
         with open("database.json", mode="w", encoding="utf-8") as write_file:
             json.dump(tasks_data, write_file, indent=4)
-            print(utils.Colors.green(f"'{task_name}' task successfully updated."))
+            print(utils.Colors.green(f"'{tasks_data[index]['name']}' task successfully updated."))
     except IOError as e:
-        print(utils.Colors.red(f"ERROR!'{e}'Task coud not be updated."))    
+        print(utils.Colors.red(f"ERROR!'{e}'Task could not be updated."))  
 
 def delete_task():
     try:
@@ -133,7 +140,7 @@ def delete_task():
 
     while True:
         try:
-            option = int(input("Chose the ID of the task you would like to delete. "))
+            option = int(input("Choose the ID of the task you would like to delete. "))
             break
         except ValueError:
             print(utils.Colors.red("Please, insert a valid ID."))
@@ -155,4 +162,4 @@ def delete_task():
             json.dump(tasks_data, write_file, indent=4)
         print(utils.Colors.green(f"Task with ID {option} successfully deleted."))
     except IOError as e:
-        print(utils.Colors.red(f"ERROR! '{e}'Task coud not be deleted."))
+        print(utils.Colors.red(f"ERROR! '{e}'Task could not be deleted."))
