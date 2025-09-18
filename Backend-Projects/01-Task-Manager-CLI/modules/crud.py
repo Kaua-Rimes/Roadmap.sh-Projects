@@ -46,10 +46,7 @@ def add_task():
     }
 
     tasks_data.append(new_task_dict)
-    
-    with open("database.json", mode="w", encoding="utf-8") as write_file:
-        json.dump(tasks_data, write_file, indent=4)
-    
+
     try:
         with open("database.json", mode="w", encoding="utf-8") as write_file:
             json.dump(tasks_data, write_file, indent=4)
@@ -119,3 +116,43 @@ def update_task():
             print(utils.Colors.green(f"'{task_name}' task successfully updated."))
     except IOError as e:
         print(utils.Colors.red(f"ERROR!'{e}'Task coud not be updated."))    
+
+def delete_task():
+    try:
+        with open("database.json", mode="r", encoding="utf-8") as read_file:
+            tasks_data = json.load(read_file)
+    except(FileNotFoundError, json.JSONDecodeError):
+        print(utils.Colors.red("No task found."))
+        return  
+
+    view_tasks()
+    
+    if not tasks_data:
+        print(utils.Colors.red("No task found."))
+        return
+
+    while True:
+        try:
+            option = int(input("Chose the ID of the task you would like to delete. "))
+            break
+        except ValueError:
+            print(utils.Colors.red("Please, insert a valid ID."))
+    
+    task_found = False
+    
+    for index, task in enumerate(tasks_data):
+        if task['id'] == option:
+            del tasks_data[index]
+            task_found = True
+            break
+    
+    if not task_found:
+        print(utils.Colors.red(f"Could not find a task with the ID {option}"))
+        return
+        
+    try:
+        with open("database.json", mode="w", encoding="utf-8") as write_file:
+            json.dump(tasks_data, write_file, indent=4)
+        print(utils.Colors.green(f"Task with ID {option} successfully deleted."))
+    except IOError as e:
+        print(utils.Colors.red(f"ERROR! '{e}'Task coud not be deleted."))

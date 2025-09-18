@@ -14,6 +14,10 @@ while True:
             crud.test()
         case "view":
             crud.view_tasks()
+        case "update":
+            crud.update_task()
+        case "delete":
+            crud.delete_task()
         case "exit":
             break
         case _:
